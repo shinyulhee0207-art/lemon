@@ -1,3 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="언제나 함께, TWS를 소개하는 팬메이드 홈페이지" />
+  <title>TWS — 24/7 WITH US</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --blue:#2677ff; --deep:#102c55; --sky:#dff3ff; --lime:#dfff6c; --paper:#f8fbff; --ink:#132038; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:"Noto Sans KR",sans-serif; color:var(--ink); background:var(--paper); overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(1160px,calc(100% - 40px)); margin:auto; }
+    nav { position:fixed; top:0; left:0; width:100%; z-index:20; background:rgba(248,251,255,.8); backdrop-filter:blur(14px); border-bottom:1px solid rgba(19,32,56,.08); }
+    .nav-inner { height:72px; display:flex; align-items:center; justify-content:space-between; }
+    .logo { font-family:"Gasoek One",sans-serif; font-size:1.8rem; color:var(--blue); letter-spacing:-2px; }
+    .nav-links { display:flex; gap:28px; font-size:.92rem; font-weight:700; }
+    .nav-links a:hover { color:var(--blue); }
+    .menu { display:none; border:0; background:none; font-size:1.5rem; cursor:pointer; }
+    .hero { min-height:100vh; padding-top:72px; display:grid; place-items:center; position:relative; background:radial-gradient(circle at 15% 25%,#fff 0 7%,transparent 8%),linear-gradient(145deg,#eaf8ff 0%,#c5e7ff 55%,#85baff 100%); overflow:hidden; }
+    .hero::after { content:"24/7"; position:absolute; right:-2vw; bottom:-8vw; font-family:"Gasoek One"; font-size:26vw; color:rgba(255,255,255,.3); line-height:1; }
+    .hero-grid { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:50px; position:relative; z-index:1; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border:1px solid var(--deep); border-radius:999px; font-size:.78rem; font-weight:900; letter-spacing:.08em; }
+    .eyebrow i { width:8px; height:8px; background:var(--lime); border-radius:50%; box-shadow:0 0 0 4px rgba(223,255,108,.45); }
+    h1 { font-family:"Gasoek One",sans-serif; font-size:clamp(4.5rem,10vw,9rem); line-height:.9; color:var(--blue); letter-spacing:-.08em; margin:28px 0 24px; text-shadow:5px 5px 0 #fff; }
+    .hero-copy h2 { font-size:clamp(1.5rem,3vw,2.5rem); letter-spacing:-.07em; margin-bottom:15px; }
+    .hero-copy p { color:#38516d; line-height:1.8; max-width:520px; }
+    .cta { display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; }
     .btn { padding:14px 22px; border-radius:12px; font-weight:900; transition:.2s; border:2px solid var(--deep); display:inline-flex; align-items:center; gap:8px; }
     .btn-primary { background:var(--deep); color:white; box-shadow:5px 5px 0 var(--lime); }
     .btn-light { background:white; }
