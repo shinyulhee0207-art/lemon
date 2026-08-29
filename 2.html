@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ff00a8" />
+  <meta name="description" content="인터넷의 품격을 바닥까지 끌어내리는 개인 홈페이지" />
+  <title>★ 전설의 인터넷 쓰레기장 ★</title>
+  <style>
+    :root { --pink:#ff00a8; --lime:#b6ff00; --yellow:#fff500; --blue:#00eaff; }
+    * { box-sizing:border-box; }
+    html { cursor:crosshair; }
+    body {
+      margin:0; min-height:100vh; overflow-x:hidden; color:#111;
+      font-family:"Comic Sans MS","Malgun Gothic",cursive,sans-serif;
+      background-color:#f0f;
+      background-image:
+        linear-gradient(45deg,rgba(255,255,0,.85) 25%,transparent 25%),
+        linear-gradient(-45deg,rgba(0,255,255,.8) 25%,transparent 25%),
+        linear-gradient(45deg,transparent 75%,rgba(0,255,0,.75) 75%),
+        linear-gradient(-45deg,transparent 75%,rgba(255,100,0,.8) 75%);
+      background-size:52px 52px;
+      animation:bgMove 2s linear infinite;
+    }
+    @keyframes bgMove { to { background-position:52px 52px; } }
+    .warning { position:sticky; top:0; z-index:20; padding:8px; background:#000; color:#fff; border-bottom:6px dashed red; font-weight:900; text-align:center; }
+    marquee { color:var(--yellow); }
+    .page { width:min(1040px,95vw); margin:18px auto 80px; padding:12px; background:rgba(255,255,255,.82); border:10px ridge #8b00ff; box-shadow:18px 18px 0 #000; transform:rotate(-.25deg); }
+    h1 { margin:10px 0; color:red; font-size:clamp(2.2rem,8vw,6.5rem); line-height:.9; text-align:center; text-shadow:4px 4px 0 #00f,-4px -4px 0 #0f0; animation:wobble .25s infinite alternate; }
+    @keyframes wobble { to { transform:rotate(1.5deg) scale(1.02); filter:hue-rotate(35deg); } }
+    .subtitle { text-align:center; font-size:clamp(1rem,3vw,1.7rem); background:#000; color:#0f0; padding:10px; border:5px dotted #fff; }
+    .blink { animation:blink .45s steps(1) infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+    .grid { display:grid; grid-template-columns:1fr 1.3fr; gap:14px; margin-top:16px; }
+    .box { padding:14px; border:7px outset #00f; background:var(--yellow); box-shadow:7px 7px 0 var(--pink); }
+    .box:nth-child(even) { background:var(--blue); border-color:red; transform:rotate(.8deg); }
+    .box h2 { margin:0 0 10px; color:#fff; background:#000; padding:6px; font-size:clamp(1.2rem,3vw,2rem); }
+    .portrait { display:grid; place-items:center; min-height:190px; font-size:8rem; background:radial-gradient(circle,#fff 0 10%,#f00 11% 25%,#ff0 26% 40%,#0f0 41% 55%,#00f 56%); border:8px groove #555; animation:spinny 5s linear infinite; }
+    @keyframes spinny { 50% { filter:hue-rotate(180deg); transform:scale(.95) rotate(-3deg); } }
+    .status { padding:10px; background:#222; color:#0f0; font-family:monospace; border:4px inset #aaa; }
+    button { margin:5px; padding:12px 18px; border:5px outset #ddd; font:900 1rem inherit; background:linear-gradient(#fff,#aaa); cursor:pointer; box-shadow:4px 4px 0 #000; }
+    button:active { border-style:inset; transform:translate(3px,3px); box-shadow:1px 1px 0 #000; }
+    #scream { background:red; color:#fff; }
+    #runaway { position:relative; z-index:10; background:#0f0; }
+    .counter { display:inline-block; padding:4px 10px; background:#000; color:red; border:4px inset #aaa; font:2rem monospace; letter-spacing:5px; }
+    .guestbook { width:100%; min-height:80px; resize:vertical; background:#000; color:#0f0; border:6px inset #999; padding:10px; font:1rem monospace; }
+    .ticker { margin:18px -12px; padding:10px; white-space:nowrap; overflow:hidden; background:red; color:#fff; border-block:5px solid #000; font-weight:900; }
+    .ticker span { display:inline-block; animation:ticker 8s linear infinite; }
+    @keyframes ticker { to { transform:translateX(-100%); } }
+    .badges { text-align:center; font-size:2.2rem; word-break:break-all; }
+    .footer { text-align:center; padding:18px; color:#fff; background:#000; border:8px double #fff; }
+    .floaty { position:fixed; z-index:30; pointer-events:none; font-size:clamp(1.8rem,5vw,4rem); animation:float 7s linear infinite; }
+    @keyframes float { from { transform:translate(-15vw,105vh) rotate(0); } to { transform:translate(115vw,-20vh) rotate(1080deg); } }
+    .trail { position:fixed; pointer-events:none; z-index:100; animation:poof .8s forwards; }
+    @keyframes poof { to { transform:translateY(-35px) rotate(180deg) scale(0); opacity:0; } }
+    #toast { display:none; position:fixed; inset:50% auto auto 50%; translate:-50% -50%; z-index:200; width:min(460px,88vw); padding:24px; text-align:center; background:#fff; border:12px ridge red; box-shadow:0 0 0 9999px rgba(0,0,0,.55); }
+    #toast.show { display:block; animation:wobble .12s infinite alternate; }
+    @media (max-width:700px) { .grid{grid-template-columns:1fr}.page{box-shadow:9px 9px 0 #000}.portrait{font-size:6rem} }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.001ms!important; animation-iteration-count:1!important; } }
+  </style>
+</head>
+<body>
+  <div class="warning"><marquee scrollamount="12">⚠ 경고: 이 홈페이지는 미적 감각에 치명적일 수 있습니다 ⚠ IE 6.0에서 대충 보일 것 같은 기분 ⚠</marquee></div>
+
+  <span class="floaty" style="animation-delay:-1s">🗑️</span>
+  <span class="floaty" style="animation-delay:-3s">🦠</span>
+  <span class="floaty" style="animation-delay:-5s">💩</span>
+
+  <main class="page">
+    <h1>쓰레기 왕국</h1>
+    <p class="subtitle"><span class="blink">★</span> 어서 와... 이런 홈페이지는 처음이지? <span class="blink">★</span></p>
+
+    <div class="ticker"><span>속보!!! 아무 일도 일어나지 않음!!! &nbsp; ● &nbsp; 운영자 현재 매우 바쁨(누워있음) &nbsp; ● &nbsp; 오늘의 운세: 인터넷 그만해 &nbsp; ● &nbsp;</span></div>
+
+    <section class="grid">
+      <article class="box">
+        <h2>관리자 소개.txt</h2>
+        <div class="portrait" aria-label="정체불명의 관리자">🤡</div>
+        <p><b>이름:</b> 밝히면 곤란함</p>
+        <p><b>취미:</b> 냉장고 열었다 닫기</p>
+        <p><b>특기:</b> 답장하려다 까먹기</p>
+      </article>
+
+      <article class="box">
+        <h2>현재 서버 상태</h2>
+        <div class="status" id="status">[정상] 햄스터 3마리가 서버를 돌리는 중...</div>
+        <p>당신은 무려 <span class="counter" id="counter">000001</span> 번째로 속았습니다.</p>
+        <button id="scream">절대 누르지 마시오</button>
+        <button id="runaway">상품 받기</button>
+        <button id="theme">더 더럽게</button>
+        <p id="fortune">오늘의 쓸데없는 운세를 확인해보세요.</p>
+        <button id="fortuneBtn">운세 뽑기</button>
+      </article>
+
+      <article class="box">
+        <h2>방명록 (저장 안 됨)</h2>
+        <textarea class="guestbook" id="message" placeholder="악플은 운영자에게 큰 힘이 됩니다..."></textarea>
+        <button id="submit">인터넷에 영원히 박제하기</button>
+        <div id="wall"></div>
+      </article>
+
+      <article class="box">
+        <h2>오늘의 추천 메뉴</h2>
+        <ul>
+          <li>민트초코 김치찌개</li>
+          <li>미지근한 제로콜라 국밥</li>
+          <li>엄마가 먹지 말랬던 냉장고 속 무언가</li>
+        </ul>
+        <p class="blink" style="font-size:1.5rem;color:red">※ 먹고 탈 나도 모름 ※</p>
+      </article>
+    </section>
+
+    <div class="badges">🚧 🔞 💾 📟 ☢️ 🆘 🐀 🪳 💥 🚧</div>
+    <footer class="footer">© 1997–2099 쓰레기 왕국 · 무단복제 적극 권장 · 최적 해상도: 모름</footer>
+  </main>
+
+  <div id="toast" role="dialog" aria-modal="true" aria-labelledby="toastTitle">
+    <h2 id="toastTitle">🎉 축하합니다! 🎉</h2>
+    <p>아무것도 당첨되지 않았습니다.</p>
+    <button id="closeToast">실망하고 닫기</button>
+  </div>
+
+  <script>
+    const $ = (q) => document.querySelector(q);
+    const fortunes = [
+      '양말 한 짝이 사라질 운명입니다.',
+      '오늘 라면 물 조절에 실패할 확률 94%.',
+      '새벽 2시에 흑역사가 생각납니다.',
+      '뜻밖의 행운: 주머니에서 500원을 발견합니다.',
+      '당신의 와이파이가 당신을 지켜보고 있습니다.'
+    ];
+    let visits = Number(localStorage.getItem('trashVisits') || 0) + 1;
+    localStorage.setItem('trashVisits', visits);
+    $('#counter').textContent = String(visits).padStart(6, '0');
+
+    $('#fortuneBtn').addEventListener('click', () => {
+      $('#fortune').textContent = '🔮 ' + fortunes[Math.floor(Math.random() * fortunes.length)];
+    });
+
+    $('#scream').addEventListener('click', () => {
+      document.body.animate([{filter:'invert(0)'},{filter:'invert(1)'},{filter:'invert(0)'}], {duration:350,iterations:3});
+      $('#status').textContent = '[비상] 관리자가 비명을 지르며 도망갔습니다!!!';
+      $('#toast').classList.add('show');
+    });
+    $('#closeToast').addEventListener('click', () => $('#toast').classList.remove('show'));
+
+    let dirt = 0;
+    $('#theme').addEventListener('click', () => {
+      dirt += 45;
+      document.body.style.filter = `hue-rotate(${dirt}deg) saturate(1.6)`;
+      $('#theme').textContent = dirt > 300 ? '이제 그만' : '더!!! 더럽게!!!';
+    });
+
+    const run = $('#runaway');
+    const escape = () => {
+      run.style.position = 'fixed';
+      run.style.left = Math.max(8, Math.random() * (innerWidth - run.offsetWidth - 8)) + 'px';
+      run.style.top = Math.max(55, Math.random() * (innerHeight - run.offsetHeight - 8)) + 'px';
+    };
+    run.addEventListener('pointerenter', escape);
+    run.addEventListener('click', () => $('#toast').classList.add('show'));
+
+    $('#submit').addEventListener('click', () => {
+      const text = $('#message').value.trim();
+      if (!text) return alert('뭐라도 쓰고 누르세요ㅡㅡ');
+      const p = document.createElement('p');
+      p.textContent = '익명의 피해자: ' + text;
+      p.style.cssText = 'background:#fff;padding:7px;border:3px dashed red;transform:rotate(' + (Math.random()*4-2) + 'deg)';
+      $('#wall').prepend(p);
+      $('#message').value = '';
+    });
+
+    let lastTrail = 0;
+    addEventListener('pointermove', (e) => {
+      if (Date.now() - lastTrail < 60) return;
+      lastTrail = Date.now();
+      const t = document.createElement('span');
+      t.className = 'trail';
+      t.textContent = ['✨','💩','🪰','🔥'][Math.floor(Math.random()*4)];
+      t.style.left = e.clientX + 'px'; t.style.top = e.clientY + 'px';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 800);
+    });
+
+    setInterval(() => {
+      document.title = document.title.startsWith('★') ? '도망가지 마!!!' : '★ 전설의 인터넷 쓰레기장 ★';
+    }, 900);
+  </script>
+</body>
+</html>
