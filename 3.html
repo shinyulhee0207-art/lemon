@@ -1,0 +1,820 @@
+아래 내용을 `index.html`에 그대로 붙여 넣으면 됩니다.
+
+```html
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ff1688">
+<meta name="description" content="하츠투하츠를 사랑하다 브라우저가 고장 난 비공식 팬페이지">
+<title>💘 하츠투하츠 과몰입 대책본부 💘</title>
+
+<style>
+:root {
+  --p: #ff1688;
+  --b: #28e7ff;
+  --y: #fff33b;
+  --g: #baff00;
+  --k: #160014;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: crosshair;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--k);
+  font-family: "Comic Sans MS", "Malgun Gothic", cursive;
+  background-color: #ff9bd1;
+  background-image:
+    radial-gradient(#f05 2px, transparent 2px),
+    linear-gradient(
+      45deg,
+      transparent 46%,
+      #ffffffa8 47% 53%,
+      transparent 54%
+    );
+  background-size: 25px 25px, 70px 70px;
+  animation: bg 3s linear infinite;
+}
+
+@keyframes bg {
+  to {
+    background-position: 25px 25px, 70px 70px;
+  }
+}
+
+.alarm {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  overflow: hidden;
+  border-block: 5px dashed white;
+  background: #050005;
+  color: var(--y);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.alarm span {
+  display: inline-block;
+  padding: 8px;
+  animation: tick 14s linear infinite;
+}
+
+@keyframes tick {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.wrap {
+  width: min(1120px, 95vw);
+  margin: 20px auto 80px;
+  padding: 12px;
+  background: #ffffffe8;
+  border: 12px ridge #762bff;
+  box-shadow: 18px 18px #111;
+  transform: rotate(-0.15deg);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 25px 8px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fff 0 18px,
+    #ffcee8 18px 36px
+  );
+  border: 8px double #f05;
+}
+
+.stamp {
+  position: absolute;
+  right: 2%;
+  top: 15px;
+  padding: 7px;
+  background: var(--g);
+  border: 4px solid #111;
+  font-weight: 900;
+  transform: rotate(13deg);
+}
+
+h1 {
+  margin: 18px 0;
+  color: #f05;
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  text-shadow:
+    5px 5px var(--b),
+    -5px -5px var(--y),
+    9px 9px #111;
+  animation: panic 0.35s infinite alternate;
+}
+
+h1 small {
+  display: block;
+  margin-top: 20px;
+  color: #111;
+  font-size: clamp(0.8rem, 2vw, 1.15rem);
+  letter-spacing: 0.18em;
+  text-shadow: none;
+}
+
+@keyframes panic {
+  to {
+    transform: rotate(0.8deg) scale(1.012);
+    filter: hue-rotate(15deg);
+  }
+}
+
+.lead {
+  display: inline-block;
+  padding: 9px 14px;
+  background: #111;
+  color: white;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  border: 5px dotted var(--g);
+}
+
+.blink {
+  animation: blink 0.5s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin: 13px;
+}
+
+nav a,
+.btn {
+  display: inline-block;
+  padding: 11px 15px;
+  border: 5px outset #eee;
+  background: linear-gradient(#fff, #bbb);
+  box-shadow: 4px 4px #111;
+  font: 900 1rem inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:active,
+nav a:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px #111;
+}
+
+.hot {
+  background: #f05;
+  color: white;
+}
+
+.weird {
+  background: var(--g);
+}
+
+.panel {
+  margin-top: 18px;
+  padding: 15px;
+  background: var(--y);
+  border: 8px outset #3455ff;
+  box-shadow: 8px 8px var(--p);
+}
+
+.panel:nth-of-type(even) {
+  background: var(--b);
+  border-color: #f05;
+}
+
+h2 {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 7px 12px;
+  background: #111;
+  color: white;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  transform: rotate(-1deg);
+}
+
+.intro,
+.lab {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 15px;
+}
+
+.copy {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.player,
+.result {
+  padding: 13px;
+  background: #111;
+  color: #9cff00;
+  border: 6px inset #aaa;
+  font-family: monospace;
+  text-align: center;
+}
+
+.bars {
+  height: 55px;
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  margin: 12px;
+}
+
+.bars i {
+  flex: 1;
+  height: 20%;
+  background: linear-gradient(var(--p), var(--y));
+  animation: eq 0.55s ease-in-out infinite alternate;
+}
+
+.bars i:nth-child(2n) {
+  animation-delay: -0.3s;
+}
+
+@keyframes eq {
+  to {
+    height: 100%;
+  }
+}
+
+.members {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
+}
+
+.member {
+  min-height: 165px;
+  padding: 12px;
+  text-align: center;
+  background: #fff;
+  border: 6px groove var(--p);
+  box-shadow: 5px 5px #111;
+  transition: 0.15s;
+}
+
+.member:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.member:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.member:hover {
+  z-index: 2;
+  transform: scale(1.12) rotate(-2deg);
+  background: var(--g);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  margin: auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--p),
+    var(--y),
+    var(--b),
+    var(--p)
+  );
+  border: 5px dotted #111;
+  color: white;
+  font: 900 2rem sans-serif;
+  text-shadow: 2px 2px #111;
+  animation: spin 7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.member h3 {
+  margin: 8px 0 2px;
+}
+
+.member p {
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+.machine {
+  padding: 13px;
+  text-align: center;
+  background: #fff;
+  border: 6px dashed #111;
+}
+
+.result {
+  min-height: 80px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.meter {
+  height: 30px;
+  border: 5px inset #999;
+  background: #222;
+}
+
+.meter span {
+  display: block;
+  width: 6%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--g) 0 14px,
+    var(--y) 14px 28px
+  );
+  transition: 0.25s;
+}
+
+.facts {
+  line-height: 1.9;
+}
+
+.facts li::marker {
+  content: "💘  ";
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  background: #111;
+  color: var(--g);
+  border: 5px inset #aaa;
+  font: 1rem monospace;
+}
+
+.wall p {
+  padding: 7px;
+  background: white;
+  border: 3px dotted #f05;
+}
+
+.badges {
+  text-align: center;
+  font-size: clamp(1.7rem, 5vw, 3.3rem);
+  word-break: break-all;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 18px;
+  padding: 18px;
+  background: #111;
+  color: white;
+  border: 8px double white;
+}
+
+.float {
+  position: fixed;
+  z-index: 80;
+  pointer-events: none;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  animation: fly 8s linear infinite;
+}
+
+@keyframes fly {
+  from {
+    transform: translate(-15vw, 105vh);
+  }
+
+  to {
+    transform: translate(115vw, -25vh) rotate(1080deg);
+  }
+}
+
+.trail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+  animation: poof 0.8s forwards;
+}
+
+@keyframes poof {
+  to {
+    transform: translateY(-40px) rotate(180deg) scale(0);
+    opacity: 0;
+  }
+}
+
+dialog {
+  width: min(500px, 90vw);
+  padding: 24px;
+  text-align: center;
+  border: 12px ridge #f05;
+  box-shadow: 10px 10px #111;
+}
+
+dialog::backdrop {
+  background: #ff008899;
+}
+
+@media (max-width: 760px) {
+  .intro,
+  .lab {
+    grid-template-columns: 1fr;
+  }
+
+  .members {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wrap {
+    box-shadow: 8px 8px #111;
+  }
+
+  .stamp {
+    position: static;
+    display: inline-block;
+  }
+
+  .member:hover {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="alarm">
+  <span>
+    🚨 긴급속보: 하츠투하츠가 너무 좋음
+    🚨 치료 방법 없음
+    🚨 최애는 8명까지 가능함
+    🚨 본 사이트는 SM과 무관한 과몰입 팬의 소행입니다
+    🚨　　🚨 긴급속보: 하츠투하츠가 너무 좋음
+    🚨 치료 방법 없음
+    🚨 최애는 8명까지 가능함 🚨
+  </span>
+</div>
+
+<span class="float" style="animation-delay:-1s">💘</span>
+<span class="float" style="animation-delay:-4s">🪽</span>
+<span class="float" style="animation-delay:-7s">🗑️</span>
+
+<main class="wrap">
+  <header class="hero">
+    <span class="stamp">
+      100% 비공식<br>
+      200% 진심
+    </span>
+
+    <h1>
+      Hearts2Hearts
+      <small>하 츠 투 하 츠 과 몰 입 대 책 본 부</small>
+    </h1>
+
+    <p class="lead">
+      <span class="blink">♥</span>
+      마음과 마음을 연결했더니 인터넷 선이 녹았습니다
+      <span class="blink">♥</span>
+    </p>
+  </header>
+
+  <nav>
+    <a href="#about">뭐 하는 팀?</a>
+    <a href="#members">멤버 8배속</a>
+    <a href="#lab">과몰입 실험실</a>
+    <a href="#guest">방명록(가짜)</a>
+  </nav>
+
+  <section class="panel" id="about">
+    <h2>💾 H2H_README_진짜최종.txt</h2>
+
+    <div class="intro">
+      <div class="copy">
+        <b>Hearts2Hearts(하츠투하츠)</b>는
+        SM엔터테인먼트의 8인조 걸그룹!
+
+        2025년 첫 싱글 <b>《The Chase》</b>로
+        문을 박차고 들어왔습니다.
+        <br><br>
+        음악과 감정으로 전 세계 팬의
+        <b>마음 ↔ 마음</b>을 연결하는 중.
+
+        부작용으로 이 홈페이지 제작자의 이성이 끊겼습니다.
+      </div>
+
+      <div class="player">
+        <b>▶ NOW PLAYING: THE CHASE</b>
+
+        <div class="bars">
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i>
+        </div>
+
+        <span id="playerText">
+          음질: 옆자리 이어폰 누설급
+        </span>
+
+        <br>
+
+        <button class="btn hot" id="playBtn">
+          재생하는 척
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="members">
+    <h2>👾 멤버 선택창 (전원 사기캐)</h2>
+
+    <div class="members">
+      <article class="member">
+        <div class="avatar">JW</div>
+        <h3>지우 JIWOO</h3>
+        <p>팀의 든든한 심장</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">CA</div>
+        <h3>카르멘 CARMEN</h3>
+        <p>발리에서 날아온 햇살</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">YH</div>
+        <h3>유하 YUHA</h3>
+        <p>청량 에너지 과다</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">ST</div>
+        <h3>스텔라 STELLA</h3>
+        <p>반짝임 허용치 초과</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">JN</div>
+        <h3>주은 JUUN</h3>
+        <p>무대 집중력 MAX</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">AN</div>
+        <h3>에이나 A-NA</h3>
+        <p>시선 강탈 담당</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">IA</div>
+        <h3>이안 IAN</h3>
+        <p>상큼함이 화면 뚫음</p>
+      </article>
+
+      <article class="member">
+        <div class="avatar">YO</div>
+        <h3>예온 YE-ON</h3>
+        <p>귀여움 최종 보스</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel" id="lab">
+    <h2>🧪 국립 하츠 과몰입 실험실</h2>
+
+    <div class="lab">
+      <div class="machine">
+        <h3>오늘의 최애 뽑기</h3>
+
+        <div class="result" id="biasResult">
+          [버튼을 눌러 운명을 망치세요]
+        </div>
+
+        <button class="btn hot" id="biasBtn">
+          최애 랜덤 압축 해제
+        </button>
+      </div>
+
+      <div class="machine">
+        <h3>내 심장 생존 게이지</h3>
+
+        <div class="meter">
+          <span id="meterBar"></span>
+        </div>
+
+        <p id="meterText">
+          현재 비교적 멀쩡함 (거짓말)
+        </p>
+
+        <button class="btn weird" id="heartBtn">
+          응원봉 흔들기!!!
+        </button>
+      </div>
+    </div>
+
+    <ul class="facts">
+      <li>멤버 수: 8명 / 최애 수: 왜인지 8명</li>
+      <li>데뷔 싱글: 《The Chase》 / 내 통장: 추격당하는 중</li>
+      <li>공식 팬덤명: S2U(하츄) / 이 페이지 방문자명: 피해자</li>
+    </ul>
+  </section>
+
+  <section class="panel" id="guest">
+    <h2>📟 방명록.exe (저장 기능 따위 없음)</h2>
+
+    <label for="msg">
+      <b>하츠투하츠에게 전하고 싶은 헛소리:</b>
+    </label>
+
+    <input
+      id="msg"
+      maxlength="80"
+      placeholder="언니들 때문에 월요일도 견딜 수 있어요 (과장됨)"
+    >
+
+    <button class="btn" id="postBtn">
+      인터넷에 박제
+    </button>
+
+    <div class="wall" id="wall" aria-live="polite"></div>
+  </section>
+
+  <div class="badges">
+    💘💿🪽✨🫀💾🚧📢💖
+  </div>
+
+  <footer class="footer">
+    © 2025–2099 하츠투하츠 과몰입 대책본부 ·
+    비공식 팬페이지 · 최적 해상도: 눈 감고 보기
+    <br>
+    <small>
+      멤버를 향한 사랑은 진짜, 사이트의 품격은 가짜.
+    </small>
+  </footer>
+</main>
+
+<dialog id="popup">
+  <h2>🎊 진단 완료 🎊</h2>
+  <p id="popupText">이미 늦었습니다.</p>
+
+  <button class="btn" id="closeBtn">
+    현실로 도망가기
+  </button>
+</dialog>
+
+<script>
+const $ = q => document.querySelector(q);
+
+const members = [
+  "지우",
+  "카르멘",
+  "유하",
+  "스텔라",
+  "주은",
+  "에이나",
+  "이안",
+  "예온"
+];
+
+let level = 6;
+let trailAt = 0;
+let playing = false;
+
+$("#biasBtn").onclick = () => {
+  const pickedMember =
+    members[Math.floor(Math.random() * members.length)];
+
+  $("#biasResult").textContent =
+    `💘 오늘의 최애: ${pickedMember} (내일은 또 모름)`;
+
+  $("#popupText").textContent =
+    `축하합니다. ${pickedMember} 포토카드 0장을 획득했습니다.`;
+
+  $("#popup").showModal();
+};
+
+$("#heartBtn").onclick = () => {
+  level = Math.min(
+    100,
+    level + Math.ceil(Math.random() * 19)
+  );
+
+  $("#meterBar").style.width = level + "%";
+
+  $("#meterText").textContent =
+    `과몰입 ${level}% — ` +
+    (level < 50
+      ? "아직 돌아갈 수 있음"
+      : "구조대도 포기함");
+
+  if (level === 100) {
+    $("#popupText").textContent =
+      "심장이 하츠투하츠에 의해 압수되었습니다.";
+
+    $("#popup").showModal();
+    level = 0;
+  }
+};
+
+$("#playBtn").onclick = () => {
+  playing = !playing;
+
+  $("#playBtn").textContent =
+    playing
+      ? "일시정지하는 척"
+      : "재생하는 척";
+
+  $("#playerText").textContent =
+    playing
+      ? "♪ 실제 음악은 안 나옴. 저작권은 소중하니까 ♪"
+      : "음질: 옆자리 이어폰 누설급";
+};
+
+$("#closeBtn").onclick = () => {
+  $("#popup").close();
+};
+
+$("#postBtn").onclick = () => {
+  const input = $("#msg");
+  const message = input.value.trim();
+
+  if (!message) {
+    alert("사랑을 한 글자라도 쓰고 누르세요ㅡㅡ");
+    return;
+  }
+
+  const post = document.createElement("p");
+
+  post.textContent =
+    "익명의 하츄: " + message;
+
+  post.style.transform =
+    `rotate(${Math.random() * 4 - 2}deg)`;
+
+  $("#wall").prepend(post);
+  input.value = "";
+};
+
+addEventListener("pointermove", event => {
+  if (Date.now() - trailAt < 70) return;
+
+  trailAt = Date.now();
+
+  const trail = document.createElement("span");
+  const decorations = ["💘", "✨", "🪽", "💿"];
+
+  trail.className = "trail";
+  trail.textContent =
+    decorations[Math.floor(Math.random() * decorations.length)];
+
+  trail.style.left = event.clientX + "px";
+  trail.style.top = event.clientY + "px";
+
+  document.body.append(trail);
+
+  setTimeout(() => {
+    trail.remove();
+  }, 800);
+});
+
+setInterval(() => {
+  document.title =
+    document.title.startsWith("💘")
+      ? "가지 마!!! 멤버 8명 다 안 봤잖아!!!"
+      : "💘 하츠투하츠 과몰입 대책본부 💘";
+}, 1000);
+</script>
+</body>
+</html>
+```
