@@ -1,1 +1,78 @@
-와 내 홈페이지 생겻다구 아빠가 말하랭
+    .btn { padding:14px 22px; border-radius:12px; font-weight:900; transition:.2s; border:2px solid var(--deep); display:inline-flex; align-items:center; gap:8px; }
+    .btn-primary { background:var(--deep); color:white; box-shadow:5px 5px 0 var(--lime); }
+    .btn-light { background:white; }
+    .btn:hover { transform:translate(-2px,-2px); }
+    .photo-card { position:relative; transform:rotate(2.5deg); background:white; padding:14px 14px 62px; border-radius:8px; box-shadow:18px 22px 50px rgba(16,44,85,.22); }
+    .photo-card img { width:100%; aspect-ratio:16/11; object-fit:cover; display:block; filter:saturate(.9); }
+    .photo-card span { position:absolute; bottom:20px; left:25px; font-family:"Gasoek One"; color:var(--blue); font-size:1.3rem; letter-spacing:-1px; }
+    section { padding:110px 0; }
+    .section-label { color:var(--blue); font-size:.78rem; font-weight:900; letter-spacing:.18em; text-transform:uppercase; margin-bottom:12px; }
+    .section-title { font-size:clamp(2.2rem,5vw,4.2rem); letter-spacing:-.08em; line-height:1.1; }
+    .about-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; margin-top:55px; align-items:start; }
+    .big-number { font-family:"Gasoek One"; font-size:clamp(7rem,18vw,13rem); color:var(--sky); line-height:.75; -webkit-text-stroke:2px var(--blue); }
+    .about-text { font-size:1.12rem; line-height:2; color:#40546a; }
+    .about-text strong { color:var(--blue); }
+    .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:30px; }
+    .fact { padding:20px; border-radius:16px; background:white; border:1px solid #dceafa; }
+    .fact b { display:block; font-size:1.2rem; color:var(--deep); margin-bottom:5px; }
+    .fact small { color:#718096; }
+    .members { background:var(--deep); color:white; }
+    .members .section-label { color:var(--lime); }
+    .member-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:50px; }
+    .member { min-height:190px; padding:26px; display:flex; flex-direction:column; justify-content:flex-end; border:1px solid rgba(255,255,255,.18); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.02)); transition:.25s; position:relative; overflow:hidden; }
+    .member::before { content:attr(data-n); position:absolute; top:-20px; right:10px; font-family:"Gasoek One"; font-size:6rem; color:rgba(255,255,255,.06); }
+    .member:hover { transform:translateY(-6px); border-color:var(--lime); background:rgba(38,119,255,.2); }
+    .member h3 { font-size:1.45rem; }
+    .member p { color:#a9c5e4; font-size:.85rem; margin-top:4px; }
+    .music-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:50px; }
+    .video { aspect-ratio:16/9; border-radius:24px; overflow:hidden; box-shadow:12px 14px 0 var(--sky); }
+    .video iframe { width:100%; height:100%; border:0; }
+    .track-list { display:flex; flex-direction:column; gap:12px; }
+    .track { background:white; border:1px solid #dceafa; border-radius:16px; padding:18px 20px; display:flex; align-items:center; gap:18px; transition:.2s; }
+    .track:hover { border-color:var(--blue); transform:translateX(5px); }
+    .track b { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:var(--sky); color:var(--blue); }
+    .track strong { display:block; }
+    .track small { color:#7a8ca2; }
+    footer { background:var(--blue); color:white; padding:55px 0; }
+    .footer-inner { display:flex; align-items:end; justify-content:space-between; gap:30px; }
+    footer .logo { color:white; font-size:3rem; }
+    footer p { color:#dcecff; margin-top:8px; font-size:.85rem; }
+    .social { display:flex; gap:18px; font-weight:700; font-size:.9rem; }
+    .reveal { opacity:0; transform:translateY(25px); transition:.7s ease; }
+    .reveal.on { opacity:1; transform:none; }
+    @media(max-width:800px){
+      .nav-links { display:none; position:absolute; top:72px; left:0; width:100%; padding:22px 20px; background:var(--paper); flex-direction:column; border-bottom:1px solid #dde8f5; }
+      .nav-links.open { display:flex; } .menu{display:block}.hero{min-height:auto;padding:125px 0 85px}.hero-grid,.about-grid,.music-grid{grid-template-columns:1fr}.hero-grid{gap:45px}.photo-card{max-width:520px}.about-grid{gap:45px}.facts{grid-template-columns:1fr}.member-grid{grid-template-columns:repeat(2,1fr)}section{padding:80px 0}.footer-inner{align-items:flex-start;flex-direction:column}.social{flex-wrap:wrap}
+    }
+    @media(max-width:480px){.wrap{width:min(100% - 28px,1160px)}.member-grid{grid-template-columns:1fr}.member{min-height:145px}h1{font-size:4.6rem}.hero-copy h2{font-size:1.45rem}}
+  </style>
+</head>
+<body>
+  <nav><div class="wrap nav-inner"><a class="logo" href="#home">TWS</a><div class="nav-links" id="navLinks"><a href="#about">ABOUT</a><a href="#members">MEMBERS</a><a href="#music">MUSIC</a></div><button class="menu" id="menu" aria-label="메뉴 열기">☰</button></div></nav>
+
+  <main>
+    <section class="hero" id="home"><div class="wrap hero-grid">
+      <div class="hero-copy"><div class="eyebrow"><i></i> TWENTY FOUR SEVEN WITH US</div><h1>TWS</h1><h2>첫 만남의 설렘을 노래하다.</h2><p>일상의 모든 순간을 특별하게 만드는 여섯 소년. 청량한 멜로디와 솔직한 이야기로 우리 곁을 채우는 TWS를 만나보세요.</p><div class="cta"><a class="btn btn-primary" href="#members">멤버 만나기 →</a><a class="btn btn-light" href="#music">노래 듣기 ♫</a></div></div>
+      <div class="photo-card"><img src="https://img.youtube.com/vi/hVAc1Vf2ITU/maxresdefault.jpg" alt="TWS 첫 만남은 계획대로 되지 않아 뮤직비디오 썸네일"><span>OUR FIRST MEETING ✦</span></div>
+    </div></section>
+
+    <section id="about"><div class="wrap"><p class="section-label">01 — About TWS</p><h2 class="section-title reveal">언제나 함께,<br>TWENTY FOUR SEVEN WITH US</h2><div class="about-grid"><div class="big-number reveal">24/7</div><div><p class="about-text reveal"><strong>TWS(투어스)</strong>는 신유, 도훈, 영재, 한진, 지훈, 경민으로 이루어진 6인조 보이그룹입니다. 팀 이름에는 하루 24시간, 일주일 내내 팬들과 함께하겠다는 따뜻한 약속이 담겨 있습니다. 소년 시절의 자연스러운 감성을 담은 독창적인 <strong>Boyhood Pop</strong>으로 반짝이는 순간을 노래합니다.</p><div class="facts reveal"><div class="fact"><b>2024.01.22</b><small>DEBUT</small></div><div class="fact"><b>6 MEMBERS</b><small>TOGETHER</small></div><div class="fact"><b>42 (SAI)</b><small>FANDOM</small></div></div></div></div></div></section>
+
+    <section class="members" id="members"><div class="wrap"><p class="section-label">02 — Members</p><h2 class="section-title reveal">여섯 개의 빛,<br>하나의 TWS</h2><div class="member-grid">
+      <article class="member reveal" data-n="01"><h3>신유 <small>SHINYU</small></h3><p>LEADER · RAP</p></article><article class="member reveal" data-n="02"><h3>도훈 <small>DOHOON</small></h3><p>VOCAL · PERFORMANCE</p></article><article class="member reveal" data-n="03"><h3>영재 <small>YOUNGJAE</small></h3><p>VOCAL</p></article><article class="member reveal" data-n="04"><h3>한진 <small>HANJIN</small></h3><p>VOCAL</p></article><article class="member reveal" data-n="05"><h3>지훈 <small>JIHOON</small></h3><p>PERFORMANCE · VOCAL</p></article><article class="member reveal" data-n="06"><h3>경민 <small>KYUNGMIN</small></h3><p>VOCAL · MAKNAE</p></article>
+    </div></div></section>
+
+    <section id="music"><div class="wrap"><p class="section-label">03 — Music</p><h2 class="section-title reveal">우리의 순간을<br>플레이리스트에</h2><div class="music-grid"><div class="video reveal"><iframe src="https://www.youtube.com/embed/hVAc1Vf2ITU" title="TWS 첫 만남은 계획대로 되지 않아 Official MV" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="track-list reveal"><div class="track"><b>01</b><div><strong>첫 만남은 계획대로 되지 않아</strong><small>plot twist</small></div></div><div class="track"><b>02</b><div><strong>내가 S면 넌 나의 N이 되어줘</strong><small>If I'm S, Can You Be My N?</small></div></div><div class="track"><b>03</b><div><strong>hey! hey!</strong><small>SUMMER BEAT!</small></div></div><div class="track"><b>04</b><div><strong>마지막 축제</strong><small>Last Festival</small></div></div></div></div></div></section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><div><div class="logo">TWS</div><p>팬심으로 만든 비공식 소개 페이지입니다.</p></div><div class="social"><a href="https://www.youtube.com/@TWS_PLEDIS" target="_blank" rel="noopener">YOUTUBE ↗</a><a href="https://www.instagram.com/tws_pledis/" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="https://weverse.io/tws" target="_blank" rel="noopener">WEVERSE ↗</a></div></div></footer>
+
+  <script>
+    const menu=document.querySelector('#menu'),links=document.querySelector('#navLinks');
+    menu.addEventListener('click',()=>links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
