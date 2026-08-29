@@ -1,11 +1,13 @@
-```html
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#ff1688">
-<meta name="description" content="하츠투하츠를 사랑하다 브라우저가 고장 난 비공식 팬페이지">
+<meta
+  name="description"
+  content="하츠투하츠를 사랑하다 브라우저가 고장 난 비공식 팬페이지"
+>
 <title>💘 하츠투하츠 과몰입 대책본부 💘</title>
 
 <style>
@@ -275,6 +277,7 @@ h2 {
   border: 6px groove var(--p);
   box-shadow: 5px 5px #111;
   transition: 0.15s;
+  cursor: pointer;
 }
 
 .member:nth-child(odd) {
@@ -288,6 +291,12 @@ h2 {
 .member:hover {
   z-index: 2;
   transform: scale(1.12) rotate(-2deg);
+  background: var(--g);
+}
+
+.member:focus-visible {
+  outline: 7px dashed #111;
+  outline-offset: 4px;
   background: var(--g);
 }
 
@@ -440,6 +449,14 @@ dialog::backdrop {
   background: #ff008899;
 }
 
+#memberDialog {
+  background: repeating-linear-gradient(
+    -45deg,
+    #fff 0 16px,
+    #ffd1e8 16px 32px
+  );
+}
+
 @media (max-width: 760px) {
   .intro,
   .lab {
@@ -536,9 +553,16 @@ dialog::backdrop {
       <div class="player">
         <b>▶ NOW PLAYING: THE CHASE</b>
 
-        <div class="bars">
-          <i></i><i></i><i></i><i></i><i></i>
-          <i></i><i></i><i></i><i></i>
+        <div class="bars" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
         </div>
 
         <span id="playerText">
@@ -682,6 +706,44 @@ dialog::backdrop {
   </footer>
 </main>
 
+<!-- 멤버 소개 팝업 -->
+<dialog id="memberDialog">
+  <div id="memberEmoji" style="font-size:4rem">
+    💘
+  </div>
+
+  <h2 id="memberName">
+    멤버 소개
+  </h2>
+
+  <p
+    id="memberEnglish"
+    style="font-size:1.2rem;font-weight:900"
+  ></p>
+
+  <p
+    id="memberIntro"
+    style="font-size:1.08rem;line-height:1.7"
+  ></p>
+
+  <p
+    id="memberComment"
+    style="
+      padding:8px;
+      background:#fff33b;
+      border:4px dashed #111;
+    "
+  ></p>
+
+  <button
+    class="btn hot"
+    id="memberCloseBtn"
+  >
+    심장 붙잡고 닫기
+  </button>
+</dialog>
+
+<!-- 공통 결과 팝업 -->
 <dialog id="popup">
   <h2>🎊 진단 완료 🎊</h2>
   <p id="popupText">이미 늦었습니다.</p>
@@ -705,11 +767,139 @@ const members = [
   "예온"
 ];
 
+const memberInfo = {
+  지우: {
+    english: "JIWOO",
+    emoji: "🐰",
+    intro:
+      "팀을 든든하게 이끄는 리더. 차분한 분위기와 무대 위 에너지를 동시에 장착했습니다.",
+    comment:
+      "※ 리더 미소 감지 시 심박수 자동 상승"
+  },
+
+  카르멘: {
+    english: "CARMEN",
+    emoji: "🌴",
+    intro:
+      "인도네시아 발리에서 온 멤버. 따뜻한 음색과 밝은 에너지로 마음을 순식간에 녹입니다.",
+    comment:
+      "※ 햇살 과다 노출 주의"
+  },
+
+  유하: {
+    english: "YUHA",
+    emoji: "🫧",
+    intro:
+      "청량한 매력과 생기 넘치는 분위기를 담당합니다. 보고 있으면 배터리가 저절로 충전되는 기분.",
+    comment:
+      "※ 상쾌함이 화면 밖으로 튈 수 있음"
+  },
+
+  스텔라: {
+    english: "STELLA",
+    emoji: "⭐",
+    intro:
+      "이름처럼 반짝이는 존재감의 소유자. 무대에서는 눈을 뗄 수 없는 매력을 발사합니다.",
+    comment:
+      "※ 광량이 너무 강하면 선글라스 착용"
+  },
+
+  주은: {
+    english: "JUUN",
+    emoji: "🎧",
+    intro:
+      "무대에 올라가면 집중력과 카리스마가 폭발하는 멤버. 평소와 무대의 온도 차가 매력 포인트.",
+    comment:
+      "※ 입덕 가속 구간입니다"
+  },
+
+  에이나: {
+    english: "A-NA",
+    emoji: "🦋",
+    intro:
+      "한 번 보면 기억에 남는 분위기와 시선을 사로잡는 표현력을 가진 멤버입니다.",
+    comment:
+      "※ 눈 마주쳤다고 착각해도 정상"
+  },
+
+  이안: {
+    english: "IAN",
+    emoji: "🍋",
+    intro:
+      "상큼하고 통통 튀는 에너지로 화면을 가득 채웁니다. 표정 하나로 팬의 하루를 구조합니다.",
+    comment:
+      "※ 비타민보다 강력할 수 있음"
+  },
+
+  예온: {
+    english: "YE-ON",
+    emoji: "🐣",
+    intro:
+      "사랑스러운 막내 매력과 무대 위 당찬 에너지를 모두 가진 귀여움 최종 보스입니다.",
+    comment:
+      "※ 막내력에 저항하지 마시오"
+  }
+};
+
+/* 멤버 카드 클릭 기능 */
+document.querySelectorAll(".member").forEach(card => {
+  card.setAttribute("role", "button");
+  card.setAttribute("tabindex", "0");
+
+  card.setAttribute(
+    "aria-label",
+    card.querySelector("h3").textContent + " 소개 보기"
+  );
+
+  const openMember = () => {
+    const name = card
+      .querySelector("h3")
+      .textContent
+      .split(" ")[0];
+
+    const info = memberInfo[name];
+
+    $("#memberEmoji").textContent =
+      info.emoji;
+
+    $("#memberName").textContent =
+      name + " 멤버 소개";
+
+    $("#memberEnglish").textContent =
+      info.english;
+
+    $("#memberIntro").textContent =
+      info.intro;
+
+    $("#memberComment").textContent =
+      info.comment;
+
+    $("#memberDialog").showModal();
+  };
+
+  card.addEventListener("click", openMember);
+
+  card.addEventListener("keydown", event => {
+    if (
+      event.key === "Enter" ||
+      event.key === " "
+    ) {
+      event.preventDefault();
+      openMember();
+    }
+  });
+});
+
+$("#memberCloseBtn").addEventListener("click", () => {
+  $("#memberDialog").close();
+});
+
+/* 과몰입 실험실 */
 let level = 6;
 let trailAt = 0;
 let playing = false;
 
-$("#biasBtn").onclick = () => {
+$("#biasBtn").addEventListener("click", () => {
   const pickedMember =
     members[Math.floor(Math.random() * members.length)];
 
@@ -720,21 +910,24 @@ $("#biasBtn").onclick = () => {
     `축하합니다. ${pickedMember} 포토카드 0장을 획득했습니다.`;
 
   $("#popup").showModal();
-};
+});
 
-$("#heartBtn").onclick = () => {
+$("#heartBtn").addEventListener("click", () => {
   level = Math.min(
     100,
     level + Math.ceil(Math.random() * 19)
   );
 
-  $("#meterBar").style.width = level + "%";
+  $("#meterBar").style.width =
+    level + "%";
 
   $("#meterText").textContent =
     `과몰입 ${level}% — ` +
-    (level < 50
-      ? "아직 돌아갈 수 있음"
-      : "구조대도 포기함");
+    (
+      level < 50
+        ? "아직 돌아갈 수 있음"
+        : "구조대도 포기함"
+    );
 
   if (level === 100) {
     $("#popupText").textContent =
@@ -743,9 +936,10 @@ $("#heartBtn").onclick = () => {
     $("#popup").showModal();
     level = 0;
   }
-};
+});
 
-$("#playBtn").onclick = () => {
+/* 가짜 음악 재생 버튼 */
+$("#playBtn").addEventListener("click", () => {
   playing = !playing;
 
   $("#playBtn").textContent =
@@ -757,13 +951,14 @@ $("#playBtn").onclick = () => {
     playing
       ? "♪ 실제 음악은 안 나옴. 저작권은 소중하니까 ♪"
       : "음질: 옆자리 이어폰 누설급";
-};
+});
 
-$("#closeBtn").onclick = () => {
+$("#closeBtn").addEventListener("click", () => {
   $("#popup").close();
-};
+});
 
-$("#postBtn").onclick = () => {
+/* 가짜 방명록 */
+$("#postBtn").addEventListener("click", () => {
   const input = $("#msg");
   const message = input.value.trim();
 
@@ -782,22 +977,38 @@ $("#postBtn").onclick = () => {
 
   $("#wall").prepend(post);
   input.value = "";
-};
+});
 
+/* 마우스 포인터 장식 */
 addEventListener("pointermove", event => {
-  if (Date.now() - trailAt < 70) return;
+  if (Date.now() - trailAt < 70) {
+    return;
+  }
 
   trailAt = Date.now();
 
-  const trail = document.createElement("span");
-  const decorations = ["💘", "✨", "🪽", "💿"];
+  const trail =
+    document.createElement("span");
+
+  const decorations = [
+    "💘",
+    "✨",
+    "🪽",
+    "💿"
+  ];
 
   trail.className = "trail";
-  trail.textContent =
-    decorations[Math.floor(Math.random() * decorations.length)];
 
-  trail.style.left = event.clientX + "px";
-  trail.style.top = event.clientY + "px";
+  trail.textContent =
+    decorations[
+      Math.floor(Math.random() * decorations.length)
+    ];
+
+  trail.style.left =
+    event.clientX + "px";
+
+  trail.style.top =
+    event.clientY + "px";
 
   document.body.append(trail);
 
@@ -806,6 +1017,7 @@ addEventListener("pointermove", event => {
   }, 800);
 });
 
+/* 브라우저 제목 변경 */
 setInterval(() => {
   document.title =
     document.title.startsWith("💘")
@@ -815,4 +1027,3 @@ setInterval(() => {
 </script>
 </body>
 </html>
-```
