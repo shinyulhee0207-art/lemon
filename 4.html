@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ff2a00">
+  <meta name="description" content="들어오는 순간 이유 없이 바빠지는 스트레스 체험 홈페이지">
+  <title>⚠ 지금 즉시 확인하세요 (1)</title>
+
+  <style>
+    :root {
+      --red: #ff2a00;
+      --yellow: #fff200;
+      --lime: #9dff00;
+      --blue: #00d9ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      cursor: wait;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: #111;
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      background: repeating-linear-gradient(
+        45deg,
+        #ffea00 0 24px,
+        #ff4b00 24px 48px
+      );
+      animation: backgroundMove 1s linear infinite;
+    }
+
+    @keyframes backgroundMove {
+      to {
+        background-position: 68px 0;
+      }
+    }
+
+    .ticker {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      overflow: hidden;
+      color: var(--yellow);
+      font-weight: 1000;
+      white-space: nowrap;
+      background: #000;
+      border-block: 5px solid white;
+    }
+
+    .ticker span {
+      display: inline-block;
+      padding: 9px;
+      animation: tickerMove 10s linear infinite;
+    }
+
+    @keyframes tickerMove {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .page {
+      width: min(1060px, 94vw);
+      margin: 20px auto 160px;
+      padding: 14px;
+      background: #fff;
+      border: 10px ridge #aaa;
+      box-shadow: 15px 15px #000;
+      animation: shake 0.15s infinite alternate;
+    }
+
+    @keyframes shake {
+      to {
+        transform: translate(1px, -1px) rotate(0.08deg);
+      }
+    }
+
+    header {
+      padding: 22px 10px;
+      text-align: center;
+      background: repeating-radial-gradient(
+        circle,
+        #fff 0 10px,
+        #ffb8b8 11px 20px
+      );
+      border: 8px double var(--red);
+    }
+
+    h1 {
+      margin: 5px;
+      color: var(--red);
+      font-size: clamp(2.5rem, 9vw, 7rem);
+      line-height: 0.85;
+      letter-spacing: -0.08em;
+      text-shadow:
+        5px 5px var(--blue),
+        9px 9px #000;
+      animation: zoom 0.28s infinite alternate;
+    }
+
+    @keyframes zoom {
+      to {
+        transform: scale(1.02) rotate(0.5deg);
+      }
+    }
+
+    .sub {
+      display: inline-block;
+      padding: 8px 12px;
+      color: white;
+      font-weight: 900;
+      background: #000;
+    }
+
+    .blink {
+      animation: blink 0.45s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .deadline {
+      margin: 15px 0;
+      padding: 12px;
+      color: white;
+      font: 1000 clamp(1.2rem, 4vw, 2.3rem) monospace;
+      text-align: center;
+      background: var(--red);
+      border: 6px dashed #fff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .box {
+      margin-top: 15px;
+      padding: 14px;
+      background: var(--yellow);
+      border: 7px outset #777;
+      box-shadow: 7px 7px #111;
+    }
+
+    .box:nth-child(even) {
+      background: var(--blue);
+    }
+
+    h2 {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 6px 10px;
+      color: #fff;
+      background: #000;
+      transform: rotate(-1deg);
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 8px 0;
+      padding: 10px;
+      font-weight: 900;
+      background: #fff;
+      border: 4px solid #111;
+    }
+
+    .task input {
+      width: 22px;
+      height: 22px;
+    }
+
+    .meter {
+      height: 34px;
+      background: #222;
+      border: 5px inset #aaa;
+    }
+
+    .meter i {
+      display: block;
+      width: 18%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--lime) 0 15px,
+        var(--yellow) 15px 30px,
+        var(--red) 30px 45px
+      );
+      transition: 0.2s;
+    }
+
+    .btn {
+      padding: 11px 15px;
+      font-weight: 1000;
+      cursor: pointer;
+      background: linear-gradient(#fff, #aaa);
+      border: 5px outset #eee;
+      box-shadow: 4px 4px #111;
+    }
+
+    .btn:active {
+      box-shadow: 1px 1px;
+      transform: translate(3px, 3px);
+    }
+
+    .danger {
+      color: #fff;
+      background: var(--red);
+    }
+
+    .result {
+      display: grid;
+      min-height: 80px;
+      margin: 10px 0;
+      padding: 12px;
+      place-items: center;
+      color: var(--lime);
+      font: 900 1rem monospace;
+      text-align: center;
+      background: #000;
+      border: 5px inset #aaa;
+    }
+
+    .hud {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      z-index: 80;
+      width: min(310px, calc(100vw - 20px));
+      padding: 10px;
+      color: white;
+      font: 800 0.86rem monospace;
+      background: #050505;
+      border: 5px solid var(--red);
+      box-shadow:
+        7px 7px white,
+        12px 12px #000;
+    }
+
+    .hud header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      color: var(--yellow);
+      background: none;
+      border: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+    }
+
+    .hud button {
+      width: 100%;
+      margin-top: 7px;
+    }
+
+    .toasts {
+      position: fixed;
+      top: 55px;
+      left: 8px;
+      z-index: 70;
+      width: min(350px, calc(100vw - 16px));
+      pointer-events: none;
+    }
+
+    .toast {
+      position: relative;
+      margin-bottom: 8px;
+      padding: 11px 30px 11px 11px;
+      font: 900 0.9rem monospace;
+      background: white;
+      border: 5px outset #ddd;
+      box-shadow: 6px 6px #111;
+      animation:
+        enter 0.15s ease-out,
+        wobble 0.15s 0.15s infinite alternate;
+    }
+
+    .toast b {
+      display: block;
+      color: var(--red);
+    }
+
+    .toast em {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      color: red;
+    }
+
+    @keyframes enter {
+      from {
+        transform: translateX(-120%);
+      }
+    }
+
+    @keyframes wobble {
+      to {
+        transform: translate(2px, -1px) rotate(0.4deg);
+      }
+    }
+
+    .escape {
+      position: fixed;
+      z-index: 100;
+      display: none;
+      padding: 9px;
+      font-weight: 900;
+      cursor: pointer;
+      background: #ddd;
+      border: 4px outset white;
+    }
+
+    .footer {
+      margin-top: 15px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      background: #000;
+      border: 6px double white;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        box-shadow: 7px 7px #000;
+      }
+
+      .hud {
+        width: 235px;
+      }
+
+      .hud .optional {
+        display: none;
+      }
+
+      .toasts {
+        width: 260px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ticker">
+    <span>
+      🚨 긴급: 아직 확인하지 않은 일이 있습니다 🚨
+      저장되지 않았을 수도 있습니다 🚨
+      마감이 방금 변경되었습니다 🚨
+      새 알림 99+ 🚨
+      　　
+      🚨 긴급: 아직 확인하지 않은 일이 있습니다 🚨
+      저장되지 않았을 수도 있습니다 🚨
+      마감이 방금 변경되었습니다 🚨
+      새 알림 99+ 🚨
+    </span>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <button class="escape" id="escape">
+    X 닫기
+  </button>
+
+  <aside class="hud" aria-label="스트레스 관제실">
+    <header>
+      <span>⚠ STRESS.exe</span>
+      <span id="clock">00:00:00</span>
+    </header>
+
+    <div class="meter">
+      <i id="stressBar"></i>
+    </div>
+
+    <div class="row">
+      <span>안 읽은 메일</span>
+      <b id="mail">9,999+</b>
+    </div>
+
+    <div class="row">
+      <span>남은 시간</span>
+      <b id="miniTime">00:30</b>
+    </div>
+
+    <p class="optional" id="status">
+      상태: 불길하게 평온함
+    </p>
+
+    <button class="btn danger" id="panic">
+      폭주 모드 켜기
+    </button>
+  </aside>
+
+  <main class="page">
+    <header>
+      <h1>
+        지금 당장<br>
+        뭔가 하세요
+      </h1>
+
+      <p class="sub">
+        <span class="blink">●</span>
+        무엇을 해야 하는지는 알려드리지 않습니다.
+      </p>
+    </header>
+
+    <div class="deadline">
+      마감까지 <span id="bigTime">00:30</span> 남았습니다
+    </div>
+
+    <section class="grid">
+      <article class="box">
+        <h2>오늘의 긴급 업무</h2>
+
+        <label class="task">
+          <input type="checkbox">
+          이메일 4,821개 읽기
+        </label>
+
+        <label class="task">
+          <input type="checkbox">
+          비밀번호 17개 변경하기
+        </label>
+
+        <label class="task">
+          <input type="checkbox">
+          어제까지 제출하기
+        </label>
+
+        <label class="task">
+          <input type="checkbox">
+          체크리스트를 새로 만들기
+        </label>
+      </article>
+
+      <article class="box">
+        <h2>결정 장애 발생기</h2>
+
+        <p>버튼을 눌러 지금 가장 시급한 일을 확인하세요.</p>
+
+        <div class="result" id="result">
+          [아직 선택하지 않음 — 이것도 불안함]
+        </div>
+
+        <button class="btn danger" id="decide">
+          가장 급한 일 뽑기
+        </button>
+      </article>
+
+      <article class="box">
+        <h2>업무 완료율</h2>
+
+        <div class="meter">
+          <i id="workBar" style="width: 3%"></i>
+        </div>
+
+        <p id="workText">
+          <b>3%</b> 완료 — 생각보다 더 안 했습니다.
+        </p>
+
+        <button class="btn" id="work">
+          열심히 하는 척
+        </button>
+      </article>
+
+      <article class="box">
+        <h2>간단한 확인 절차</h2>
+
+        <p>
+          아래 버튼을 누르면 정말로 확인할 것인지 다시 확인합니다.
+        </p>
+
+        <button class="btn" id="confirm">
+          확인하러 가기
+        </button>
+
+        <p id="confirmText">
+          확인 횟수: 0/???
+        </p>
+      </article>
+    </section>
+
+    <footer class="footer">
+      본 페이지는 실제 업무를 처리하지 않습니다.<br>
+      <small>불안감만 성실하게 처리합니다.</small>
+    </footer>
+  </main>
+
+  <script>
+    const $ = (query) => document.querySelector(query);
+
+    const alerts = [
+      ["저장 실패", "성공적으로 실패했습니다."],
+      ["새 업무", '"간단한 수정" 38건이 배정되었습니다.'],
+      ["보안 경고", "비밀번호가 너무 기억하기 쉽습니다."],
+      ["일정 변경", "마감이 3일 전으로 변경되었습니다."],
+      ["배터리 1%", "충전기는 마지막으로 어제 목격됐습니다."],
+      ["답장 필요", '상대방이 "확인 부탁드립니다"라고 보냈습니다.']
+    ];
+
+    const jobs = [
+      "메일 제목만 2시간 고민하기",
+      "회의를 위한 사전 회의 잡기",
+      "파일명에 진짜최종최종 붙이기",
+      "모든 비밀번호를 기억해내기",
+      "이미 늦은 일부터 시작하기"
+    ];
+
+    let seconds = 30;
+    let stress = 18;
+    let done = 3;
+    let checks = 0;
+    let panic = false;
+    let toastTimer;
+
+    const pad = (number) => String(number).padStart(2, "0");
+
+    function updateStress() {
+      if (panic) {
+        stress += Math.ceil(Math.random() * 4);
+      }
+
+      stress = Math.min(100, stress);
+
+      $("#stressBar").style.width = stress + "%";
+
+      $("#status").textContent =
+        "상태: " +
+        (
+          stress < 40
+            ? "불길하게 평온함"
+            : stress < 75
+              ? "식은땀 정상 작동 중"
+              : "정신이 404 NOT FOUND"
+        );
+    }
+
+    function showToast() {
+      const [title, message] =
+        alerts[Math.floor(Math.random() * alerts.length)];
+
+      const toast = document.createElement("div");
+
+      toast.className = "toast";
+      toast.innerHTML =
+        `<em>×</em><b>⚠ ${title}</b>${message}`;
+
+      $("#toasts").prepend(toast);
+
+      stress = Math.min(100, stress + 6);
+      updateStress();
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+
+    $("#panic").onclick = () => {
+      panic = !panic;
+
+      $("#panic").textContent =
+        panic ? "그만! 평화 모드로" : "폭주 모드 켜기";
+
+      $("#escape").style.display =
+        panic ? "block" : "none";
+
+      clearInterval(toastTimer);
+
+      if (panic) {
+        showToast();
+        toastTimer = setInterval(showToast, 1500);
+      } else {
+        stress = 18;
+        updateStress();
+      }
+    };
+
+    $("#escape").addEventListener("pointerenter", () => {
+      $("#escape").style.left =
+        Math.random() * Math.max(10, innerWidth - 100) + "px";
+
+      $("#escape").style.top =
+        Math.random() * Math.max(55, innerHeight - 60) + "px";
+    });
+
+    $("#escape").onclick = showToast;
+
+    $("#decide").onclick = () => {
+      const job = jobs[Math.floor(Math.random() * jobs.length)];
+
+      $("#result").textContent = "🚨 " + job;
+
+      stress += 8;
+      updateStress();
+    };
+
+    $("#work").onclick = () => {
+      done = Math.min(
+        99,
+        done + Math.ceil(Math.random() * 5)
+      );
+
+      $("#workBar").style.width = done + "%";
+
+      $("#workText").innerHTML =
+        `<b>${done}%</b> 완료 — ` +
+        (
+          done < 50
+            ? "아직 멀었습니다."
+            : "왜 100%가 안 될까요?"
+        );
+    };
+
+    $("#confirm").onclick = () => {
+      checks++;
+
+      $("#confirmText").textContent =
+        `확인 횟수: ${checks}/???`;
+
+      $("#confirm").textContent =
+        checks % 3 === 0
+          ? "진짜 마지막 확인"
+          : "정말 확인하시겠습니까?";
+
+      if (checks % 4 === 0) {
+        showToast();
+      }
+    };
+
+    document
+      .querySelectorAll(".task input")
+      .forEach((checkbox) => {
+        checkbox.onchange = () => {
+          checkbox.parentElement.style.textDecoration =
+            checkbox.checked ? "line-through" : "none";
+
+          if (checkbox.checked) {
+            setTimeout(() => {
+              checkbox.checked = false;
+              checkbox.parentElement.style.textDecoration = "none";
+              showToast();
+            }, 900);
+          }
+        };
+      });
+
+    setInterval(() => {
+      const now = new Date();
+
+      $("#clock").textContent = [
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds()
+      ].map(pad).join(":");
+
+      seconds = seconds ? seconds - 1 : 30;
+
+      const time = "00:" + pad(seconds);
+
+      $("#miniTime").textContent = time;
+      $("#bigTime").textContent = time;
+
+      $("#mail").textContent =
+        (9999 + (30 - seconds) * 23).toLocaleString() + "+";
+
+      if (seconds === 0) {
+        showToast();
+      }
+
+      updateStress();
+    }, 1000);
+
+    setInterval(() => {
+      document.title = document.title.startsWith("⚠")
+        ? "돌아오세요! 아직 안 끝났어요"
+        : `⚠ 지금 즉시 확인하세요 (${Math.floor(Math.random() * 99) + 1})`;
+    }, 900);
+  </script>
+</body>
+</html>
